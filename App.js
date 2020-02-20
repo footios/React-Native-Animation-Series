@@ -11,15 +11,44 @@ PROFILE_IMAGE_MIN_HEIGHT = 40;
 // So we monitor the onScroll prop of the ScrollView
 // and to that we'll attach an animated event method.
 class App extends Component {
-state = { scrollY: new Animated.Value(0)}
+	state = { scrollY: new Animated.Value(0) };
 
 	render() {
+		const headerHeight = this.state.scrollY.interpolate({
+			inputRange: [ 0, HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT ],
+			outputRange: [ HEADER_MAX_HEIGHT, HEADER_MIN_HEIGHT ],
+			extrapolate: 'clamp' // so the header doesn't go further up than the minimun height.
+		});
+		// Decrease image height
+		const profileImageHeight = this.state.scrollY.interpolate({
+			inputRange: [ 0, HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT ],
+			outputRange: [ PROFILE_IMAGE_MAX_HEIGHT, PROFILE_IMAGE_MIN_HEIGHT ],
+			extrapolate: 'clamp'
+		});
 
-const headerHeight = this.state.scrollY.interpolate({
-	inputRange: [0, HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT], 
-	outputRange: [HEADER_MAX_HEIGHT, HEADER_MIN_HEIGHT],
-	extrapolate: 'clamp' // so the header doesn't go further up than the minimun height.
-})
+		// Move image under the header
+		const profileImageMarginTop = this.state.scrollY.interpolate({
+			inputRange: [ 0, HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT ],
+			outputRange: [ HEADER_MAX_HEIGHT - PROFILE_IMAGE_MAX_HEIGHT / 2, HEADER_MAX_HEIGHT + 5 ],
+			extrapolate: 'clamp'
+		});
+
+		const headerZindex = this.state.scrollY.interpolate({
+			inputRange: [ HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT, HEADER_MIN_HEIGHT ],
+			outputRange: [ 0, 1 ],
+			extrapolate: 'clamp'
+		});
+
+		const headerTitleBottom = this.state.scrollY.interpolate({
+			inputRange: [
+				0,
+				HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT,
+				HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT + 5 + PROFILE_IMAGE_MIN_HEIGHT,
+				HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT + 5 + PROFILE_IMAGE_MIN_HEIGHT + 26
+			],
+			outputRange: [ -20, -20, -20, 0 ],
+			extrapolate: 'clamp'
+		});
 
 		return (
 			<View style={{ flex: 1 }}>
@@ -31,34 +60,37 @@ const headerHeight = this.state.scrollY.interpolate({
 						right: 0,
 						backgroundColor: 'lightskyblue',
 						// height: HEADER_MAX_HEIGHT
-						height: headerHeight // animated
+						height: headerHeight, // animated
+						zIndex: headerZindex,
+						alignItems: 'center'
 					}}
 				>
-					
+					<Animated.View style={{ position: 'absolute', bottom: headerTitleBottom }}>
+						<Text style={{ fontSize: 14, fontWeight: 'bold', color: 'white' }}>Expo</Text>
+					</Animated.View>
 				</Animated.View>
 
-				<ScrollView style={{ flex: 1 }}
-				scrollEventThrottle={16} // lets the header move
-				onScroll={Animated.event(
-					[{nativeEvent: {contentOffset: {y: this.state.scrollY}}}]
-				)}
+				<ScrollView
+					style={{ flex: 1 }}
+					scrollEventThrottle={16} // lets the header move
+					onScroll={Animated.event([ { nativeEvent: { contentOffset: { y: this.state.scrollY } } } ])}
 				>
-					<View
+					<Animated.View
 						style={{
-							height: PROFILE_IMAGE_MAX_HEIGHT,
-							width: PROFILE_IMAGE_MAX_HEIGHT,
+							height: profileImageHeight,
+							width: profileImageHeight,
 							borderRadius: PROFILE_IMAGE_MAX_HEIGHT / 2,
 							borderColor: 'white',
 							borderWidth: 3,
 							overflow: 'hidden',
 							marginLeft: 10,
 							// Set the image in the middle of the line of the header.
-							marginTop: HEADER_MAX_HEIGHT - PROFILE_IMAGE_MAX_HEIGHT / 2,
+							marginTop: profileImageMarginTop,
 							marginLeft: 10
 						}}
 					>
 						<Image source={require('./assets/expo.jpeg')} style={{ flex: 1, width: null, height: null }} />
-					</View>
+					</Animated.View>
 					<View>
 						<Text style={{ fontWeight: 'bold', fontSize: 26, paddingLeft: 10 }}>Expo</Text>
 					</View>

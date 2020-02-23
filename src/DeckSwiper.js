@@ -40,7 +40,23 @@ class DeckSwiper extends Component {
         this.position.setValue({ x: 0, y: gestureState.dy });
       },
       onPanResponderRelease: (evt, gestureState) => {
-        //
+        // User does not swip fast or long enough to change card
+        // then card should swipe back
+        // Other wise swipe the card out of the screen.
+        // 50 is a threshold figure
+        // gestureState.vy > 0.7 = velosity is grater than 0.7 seconds
+        // Note: gestureState.dy and gestureState.vy
+        // will be negative values, because we swip up!
+        if (-gestureState.dy > 50 && -gestureState.vy > 0.7) {
+          Animated.timing(this.position, {
+            toValue: { x: 0, y: -SCREEN_HEIGHT },
+            duration: 400
+          }).start();
+        } else {
+          Animated.spring(this.position, {
+            toValue: { x: 0, y: 0 }
+          }).start();
+        }
       }
     });
   }

@@ -47,9 +47,26 @@ class DeckSwiper extends Component {
         // gestureState.vy > 0.7 = velosity is grater than 0.7 seconds
         // Note: gestureState.dy and gestureState.vy
         // will be negative values, because we swip up!
-        if (-gestureState.dy > 50 && -gestureState.vy > 0.7) {
+        if (-gestureState.dy > 200 && -gestureState.vy > 1) {
           Animated.timing(this.position, {
             toValue: { x: 0, y: -SCREEN_HEIGHT },
+            duration: 1000
+          }).start(() => {
+            // Add the panresponder to the next card
+            // Set the position back to normal
+            this.setState({ currenctIndex: this.state.currenctIndex + 1 });
+            this.position.setValue({ x: 0, y: 0 });
+          });
+        } else {
+          Animated.spring(this.position, {
+            toValue: { x: 0, y: 0 }
+          }).start();
+        }
+
+        // For swiping down
+        if (gestureState.dy > 50 && gestureState.vy > 0.7) {
+          Animated.timing(this.position, {
+            toValue: { x: 0, y: SCREEN_HEIGHT },
             duration: 400
           }).start();
         } else {
@@ -62,6 +79,10 @@ class DeckSwiper extends Component {
   }
   renderArticles = () => {
     return ARTICLES.map((item, i) => {
+      // hide the cards that are swiped out
+      if (i < this.state.currenctIndex) {
+        return null;
+      }
       if (i === this.state.currenctIndex) {
         return (
           <Animated.View

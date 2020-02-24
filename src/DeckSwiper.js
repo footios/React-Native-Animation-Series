@@ -40,7 +40,7 @@ class DeckSwiper extends Component {
         this.position.setValue({ x: 0, y: gestureState.dy });
       },
       onPanResponderRelease: (evt, gestureState) => {
-        // User does not swip fast or long enough to change card
+        // If user does not swip fast or long enough to change card,
         // then card should swipe back
         // Other wise swipe the card out of the screen.
         // 50 is a threshold figure
@@ -101,7 +101,7 @@ class DeckSwiper extends Component {
             >
               <View style={{ flex: 2, backgroundColor: "black" }}>
                 <Image
-                  source={ARTICLES[i].uri}
+                  source={ARTICLES[i].uri} // VIC
                   style={{
                     flex: 1,
                     height: null,

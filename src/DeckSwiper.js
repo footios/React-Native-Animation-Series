@@ -8,7 +8,7 @@ import {
   Animated,
   PanResponder
 } from "react-native";
-import DeckSwipeAnimatedView from "./components/DeckSwipeAnimatedView";
+import DeckSwipeView from "./components/DeckSwipeView";
 
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 const SCREEN_WIDTH = Dimensions.get("window").width;
@@ -45,20 +45,21 @@ class DeckSwiper extends Component {
           // update the position when user starts panning
           // to the new position
           // `dy` because we only want to move vertically.
+          // Note: you have to set also a value for x.
           this.position.setValue({ x: 0, y: gestureState.dy });
         }
       },
       onPanResponderRelease: (evt, gestureState) => {
         // Check if there is a previous card,
-        // and user swiped down, more then 50.
-        if (
+        // and user swiped down, more than 50.
+        if ( 
           this.state.currenctIndex > 0 &&
-          gestureState.dy > 50 &&
-          gestureState.vy > 0.7
+          gestureState.dy > 200 &&
+          gestureState.vy > 1
         ) {
           Animated.timing(this.swipedCardPosition, {
             toValue: { x: 0, y: 0 },
-            duration: 1000
+            duration: 700
           }).start(() => {
             // Add the panresponder to the previous card again
             // Set the position back to where it was
@@ -73,10 +74,14 @@ class DeckSwiper extends Component {
         // gestureState.vy > 0.7 = velosity is grater than 0.7 seconds
         // Note: gestureState.dy and gestureState.vy
         // will be negative values, because we swip up!
-        else if (-gestureState.dy > 50 && -gestureState.vy > 0.7 && this.currenctIndex < ARTICLES.length - 1) {
+        else if (
+          -gestureState.dy > 200 &&
+          -gestureState.vy > 1 &&
+          this.state.currenctIndex < ARTICLES.length - 1
+        ) {
           Animated.timing(this.position, {
             toValue: { x: 0, y: -SCREEN_HEIGHT },
-            duration: 1000
+            duration: 700
           }).start(() => {
             // Add the panresponder to the next card
             // Set the position back to normal
@@ -84,7 +89,7 @@ class DeckSwiper extends Component {
             this.position.setValue({ x: 0, y: 0 });
           });
         } else {
-            // set the card back to where it was
+          // set the card back to where it was
           Animated.parallel([
             Animated.spring(this.position, {
               toValue: { x: 0, y: 0 }
@@ -92,23 +97,12 @@ class DeckSwiper extends Component {
             Animated.spring(this.swipedCardPosition, {
               toValue: { x: 0, y: -SCREEN_HEIGHT }
             })
-          ]).start();;
+          ]).start();
         }
-
-        // For swiping down
-        // if (gestureState.dy > 50 && gestureState.vy > 0.7) {
-        //   Animated.timing(this.position, {
-        //     toValue: { x: 0, y: SCREEN_HEIGHT },
-        //     duration: 400
-        //   }).start();
-        // } else {
-        //   Animated.spring(this.position, {
-        //     toValue: { x: 0, y: 0 }
-        //   }).start();
-        // }
       }
     });
   }
+
   renderArticles = () => {
     return ARTICLES.map((item, i) => {
       // Returns an Animated.View for the card that is
@@ -121,52 +115,7 @@ class DeckSwiper extends Component {
             style={this.swipedCardPosition.getLayout()}
             {...this.PanResponder.panHandlers}
           >
-            <View
-              style={{
-                flex: 1,
-                position: "absolute", // to get the text only one time
-                height: SCREEN_HEIGHT,
-                width: SCREEN_WIDTH,
-                backgroundColor: "white"
-              }}
-            >
-              <View style={{ flex: 2, backgroundColor: "black" }}>
-                <Image
-                  source={ARTICLES[i].uri}
-                  style={{
-                    flex: 1,
-                    height: null,
-                    width: null,
-                    resizeMode: "center"
-                  }}
-                />
-              </View>
-              <View style={{ flex: 3, padding: 5 }}>
-                {/* The PanResponder, does not work if there is empty space in the screen */}
-                <Text>
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry. Lorem Ipsum has been the industry's
-                  standard dummy text ever since the 1500s, when an unknown
-                  printer took a galley of type and scrambled it to make a type
-                  specimen book. It has survived not only five centuries, but
-                  also the leap into electronic typesetting, remaining
-                  essentially unchanged. It was popularised in the 1960s with
-                  the release of Letraset sheets containing Lorem Ipsum
-                  passages, and more recently with desktop publishing software
-                  like Aldus PageMaker including versions of Lorem Ipsum. Lorem
-                  Ipsum is simply dummy text of the printing and typesetting
-                  industry. Lorem Ipsum has been the industry's standard dummy
-                  text ever since the 1500s, when an unknown printer took a
-                  galley of type and scrambled it to make a type specimen book.
-                  It has survived not only five centuries, but also the leap
-                  into electronic typesetting, remaining essentially unchanged.
-                  It was popularised in the 1960s with the release of Letraset
-                  sheets containing Lorem Ipsum passages, and more recently with
-                  desktop publishing software like Aldus PageMaker including
-                  versions of Lorem Ipsum.
-                </Text>
-              </View>
-            </View>
+            <DeckSwipeView i={i} />
           </Animated.View>
         );
         // hide the cards that are swiped out
@@ -180,55 +129,10 @@ class DeckSwiper extends Component {
             style={this.position.getLayout()}
             {...this.PanResponder.panHandlers}
           >
-            <View
-              style={{
-                flex: 1,
-                position: "absolute", // to get the text only one time
-                height: SCREEN_HEIGHT,
-                width: SCREEN_WIDTH,
-                backgroundColor: "white"
-              }}
-            >
-              <View style={{ flex: 2, backgroundColor: "black" }}>
-                <Image
-                  source={ARTICLES[i].uri}
-                  style={{
-                    flex: 1,
-                    height: null,
-                    width: null,
-                    resizeMode: "center"
-                  }}
-                />
-              </View>
-              <View style={{ flex: 3, padding: 5 }}>
-                {/* The PanResponder, does not work if there is empty space in the screen */}
-                <Text>
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry. Lorem Ipsum has been the industry's
-                  standard dummy text ever since the 1500s, when an unknown
-                  printer took a galley of type and scrambled it to make a type
-                  specimen book. It has survived not only five centuries, but
-                  also the leap into electronic typesetting, remaining
-                  essentially unchanged. It was popularised in the 1960s with
-                  the release of Letraset sheets containing Lorem Ipsum
-                  passages, and more recently with desktop publishing software
-                  like Aldus PageMaker including versions of Lorem Ipsum. Lorem
-                  Ipsum is simply dummy text of the printing and typesetting
-                  industry. Lorem Ipsum has been the industry's standard dummy
-                  text ever since the 1500s, when an unknown printer took a
-                  galley of type and scrambled it to make a type specimen book.
-                  It has survived not only five centuries, but also the leap
-                  into electronic typesetting, remaining essentially unchanged.
-                  It was popularised in the 1960s with the release of Letraset
-                  sheets containing Lorem Ipsum passages, and more recently with
-                  desktop publishing software like Aldus PageMaker including
-                  versions of Lorem Ipsum.
-                </Text>
-              </View>
-            </View>
+            <DeckSwipeView i={i} />
           </Animated.View>
         );
-        // else show a view without the panResponder
+        // else show a view i.e. the second card without the panResponder
       } else {
         return (
           <Animated.View
@@ -236,56 +140,11 @@ class DeckSwiper extends Component {
             // style={this.position.getLayout()}
             // {...this.PanResponder.panHandlers}
           >
-            <View
-              style={{
-                flex: 1,
-                position: "absolute", // to get the text only one time
-                height: SCREEN_HEIGHT,
-                width: SCREEN_WIDTH,
-                backgroundColor: "white"
-              }}
-            >
-              <View style={{ flex: 2, backgroundColor: "black" }}>
-                <Image
-                  source={ARTICLES[i].uri}
-                  style={{
-                    flex: 1,
-                    height: null,
-                    width: null,
-                    resizeMode: "center"
-                  }}
-                />
-              </View>
-              <View style={{ flex: 3, padding: 5 }}>
-                {/* The PanResponder, does not work if there is empty space in the screen */}
-                <Text>
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry. Lorem Ipsum has been the industry's
-                  standard dummy text ever since the 1500s, when an unknown
-                  printer took a galley of type and scrambled it to make a type
-                  specimen book. It has survived not only five centuries, but
-                  also the leap into electronic typesetting, remaining
-                  essentially unchanged. It was popularised in the 1960s with
-                  the release of Letraset sheets containing Lorem Ipsum
-                  passages, and more recently with desktop publishing software
-                  like Aldus PageMaker including versions of Lorem Ipsum. Lorem
-                  Ipsum is simply dummy text of the printing and typesetting
-                  industry. Lorem Ipsum has been the industry's standard dummy
-                  text ever since the 1500s, when an unknown printer took a
-                  galley of type and scrambled it to make a type specimen book.
-                  It has survived not only five centuries, but also the leap
-                  into electronic typesetting, remaining essentially unchanged.
-                  It was popularised in the 1960s with the release of Letraset
-                  sheets containing Lorem Ipsum passages, and more recently with
-                  desktop publishing software like Aldus PageMaker including
-                  versions of Lorem Ipsum.
-                </Text>
-              </View>
-            </View>
+            <DeckSwipeView i={i} />
           </Animated.View>
         );
       }
-    }).reverse();
+    }).reverse(); // reverse to get the first image first!
   };
   render() {
     return <View style={{ flex: 1 }}>{this.renderArticles()}</View>;

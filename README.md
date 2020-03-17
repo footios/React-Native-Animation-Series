@@ -4,15 +4,16 @@ A Youtube Tutorial:
 
 
 1. TwitterScrollable
-- [Animated.event](https://animationbook.codedaily.io/animated-event/)
-- [interpolation](https://facebook.github.io/react-native/docs/animations#interpolation)
-- [How does Animated.Event work in React Native?](https://stackoverflow.com/questions/43510145/how-does-animated-event-work-in-react-native)
+    - [Animated.event](https://animationbook.codedaily.io/animated-event/)
+    - [interpolation](https://facebook.github.io/react-native/docs/animations#interpolation)
+    - [scrollEventThrottle](https://reactnative.dev/docs/scrollview#scrolleventthrottle)
+    - [How does Animated.Event work in React Native?](https://stackoverflow.com/questions/43510145/how-does-animated-event-work-in-react-native)
 
 
 2. DeckSwiper
-- [PanResponder](https://facebook.github.io/react-native/docs/panresponder)
-- [getLayout](https://animationbook.codedaily.io/get-layout/)
-- `getLayout` is a method of [AnimatedValueXY](https://facebook.github.io/react-native/docs/animatedvaluexy#getlayout)
-- [Tracking gestures](https://facebook.github.io/react-native/docs/animations#tracking-gestures)
-- [A gestureState object has the following](https://facebook.github.io/react-native/docs/panresponder#__docusaurus)
+    - [PanResponder](https://facebook.github.io/react-native/docs/panresponder)
+    - [getLayout](https://animationbook.codedaily.io/get-layout/)
+    - `getLayout` is a method of [AnimatedValueXY](https://facebook.github.io/react-native/docs/animatedvaluexy#getlayout)
+    - [Tracking gestures](https://facebook.github.io/react-native/docs/animations#tracking-gestures)
+    - [A gestureState object has the following](https://facebook.github.io/react-native/docs/panresponder#__docusaurus)
     

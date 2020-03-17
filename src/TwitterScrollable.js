@@ -69,7 +69,14 @@ class TwitterScrollable extends Component {
 						<Text style={{ fontSize: 14, fontWeight: 'bold', color: 'white' }}>Expo</Text>
 					</Animated.View>
 				</Animated.View>
-
+				{/* onScroll
+				Fires at most once per frame during scrolling. 
+				The frequency of the events can be controlled using the scrollEventThrottle prop. 
+				The event has the shape 
+				{ nativeEvent: { contentInset: { bottom, left, right, top }, 
+				contentOffset: { x, y }, contentSize: { height, width }, 
+				layoutMeasurement: { height, width }, zoomScale } }. 
+				All values are numbers. */}
 				<ScrollView
 					style={{ flex: 1 }}
 					scrollEventThrottle={16} // lets the header move

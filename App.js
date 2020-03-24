@@ -3,6 +3,7 @@ import { View, StyleSheet } from "react-native";
 import TwitterScrollable from "./src/TwitterScrollable";
 import PG_TwitterScrollable from "./src/PG_TwitterScrollable";
 import DeckSwiper from "./src/DeckSwiper";
+import PG_DeckSwiper from "./src/PG_DeckSwiper";
 
 class App extends Component {
   render() {
@@ -10,7 +11,8 @@ class App extends Component {
       <View style={(style = styles.container)}>
         {/* <TwitterScrollable /> */}
         {/* <PG_TwitterScrollable /> */}
-        <DeckSwiper />
+        {/* <DeckSwiper /> */}
+        <PG_DeckSwiper />
       </View>
     );
   }

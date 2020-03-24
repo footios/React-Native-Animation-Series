@@ -15,7 +15,7 @@ const SCREEN_WIDTH = Dimensions.get("window").width;
 
 import { ARTICLES } from "./components/ARTICLES";
 
-class DeckSwiper extends Component {
+class PG_DeckSwiper extends Component {
   constructor(props) {
     super(props);
     this.position = new Animated.ValueXY();
@@ -52,8 +52,8 @@ class DeckSwiper extends Component {
         // and user swiped down, more than 50.
         if (
           this.state.currenctIndex > 0 &&
-          gestureState.dy > 200 &&
-          gestureState.vy > 1
+          gestureState.dy > 50 &&
+          gestureState.vy > 0.7
         ) {
           Animated.timing(this.swipedCardPosition, {
             toValue: { x: 0, y: 0 },
@@ -73,8 +73,8 @@ class DeckSwiper extends Component {
         // Note: gestureState.dy and gestureState.vy
         // will be negative values, because we swip up!
         else if (
-          -gestureState.dy > 200 &&
-          -gestureState.vy > 1 &&
+          -gestureState.dy > 50 &&
+          -gestureState.vy > 0.7 &&
           this.state.currenctIndex < ARTICLES.length - 1
         ) {
           Animated.timing(this.position, {
@@ -82,7 +82,7 @@ class DeckSwiper extends Component {
             duration: 700
           }).start(() => {
             // Add the panresponder to the next card
-            // Set the position back to normal
+              // Set the position back to normal
             this.setState({ currenctIndex: this.state.currenctIndex + 1 });
             this.position.setValue({ x: 0, y: 0 });
           });
@@ -96,7 +96,7 @@ class DeckSwiper extends Component {
               toValue: { x: 0, y: -SCREEN_HEIGHT }
             })
           ]).start();
-        }
+        } 
       }
     });
   }
@@ -125,7 +125,7 @@ class DeckSwiper extends Component {
           <Animated.View
             key={item.id}
             // style={this.position.getLayout()}
-            // The style underneath is equivalent to this.position.getLayout()
+            // The style underneath is equivalent to above one.
             style={{ top: this.position.y, left: this.position.x }}
             {...this.PanResponder.panHandlers}
           >
@@ -159,4 +159,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default DeckSwiper;
+export default PG_DeckSwiper;

@@ -33,7 +33,7 @@ class DeckSwipeView extends Component {
               flex: 1,
               height: null,
               width: null,
-              resizeMode: "center"
+              resizeMode: 'contain'
             }}
           />
         </View>

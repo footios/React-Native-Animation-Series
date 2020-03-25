@@ -19,4 +19,7 @@ A Youtube Tutorial:
     
 
 3. UberIntro
-- Installed packages: react-navigation, react-native-animatable, native-base
+- It seams like the navigation is outdated. So from the docs of React Navigation, we have to install the following packages: 
+    * expo install @react-navigation/native react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view
+- So we don't need to install: react-navigation
+- But we still need to install: react-native-animatable native-base

@@ -4,6 +4,7 @@ import TwitterScrollable from "./src/TwitterScrollable";
 import PG_TwitterScrollable from "./src/PG_TwitterScrollable";
 import DeckSwiper from "./src/DeckSwiper";
 import PG_DeckSwiper from "./src/PG_DeckSwiper";
+import UberIntro from "./src/UberIntro";
 
 class App extends Component {
   render() {
@@ -12,7 +13,8 @@ class App extends Component {
         {/* <TwitterScrollable /> */}
         {/* <PG_TwitterScrollable /> */}
         {/* <DeckSwiper /> */}
-        <PG_DeckSwiper />
+        {/* <PG_DeckSwiper /> */}
+        <UberIntro />
       </View>
     );
   }

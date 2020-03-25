@@ -17,3 +17,6 @@ A Youtube Tutorial:
 - [Tracking gestures](https://facebook.github.io/react-native/docs/animations#tracking-gestures)
 - [A gestureState object has the following](https://facebook.github.io/react-native/docs/panresponder#__docusaurus)
     
+
+3. UberIntro
+- Installed packages: react-navigation, react-native-animatable, native-base

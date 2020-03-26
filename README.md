@@ -23,3 +23,5 @@ A Youtube Tutorial:
     * expo install @react-navigation/native react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view
 - So we don't need to install: react-navigation
 - But we still need to install: react-native-animatable native-base
+- [nathvarun/Uber-App-UI-Clone-React-Native](https://github.com/nathvarun/Uber-App-UI-Clone-React-Native)
+

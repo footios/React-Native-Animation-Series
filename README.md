@@ -24,4 +24,24 @@ A Youtube Tutorial:
 - So we don't need to install: react-navigation
 - But we still need to install: react-native-animatable native-base
 - [nathvarun/Uber-App-UI-Clone-React-Native](https://github.com/nathvarun/Uber-App-UI-Clone-React-Native)
+- Extra info: a log in keyboardWillShow for the content of `event` gives:  
+```js
+Object {
+  "duration": 250,
+  "easing": "keyboard",
+  "endCoordinates": Object {
+    "height": 301,
+    "screenX": 0,
+    "screenY": 595,
+    "width": 414,
+  },
+  "isEventFromThisApp": true,
+  "startCoordinates": Object {
+    "height": 243,
+    "screenX": 0,
+    "screenY": 896,
+    "width": 414,
+  },
+}
+```
 

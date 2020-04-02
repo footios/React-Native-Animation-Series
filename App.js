@@ -9,6 +9,7 @@ import PG_TwitterScrollable from "./src/PG_TwitterScrollable";
 import DeckSwiper from "./src/DeckSwiper";
 import PG_DeckSwiper from "./src/PG_DeckSwiper";
 import LoginScreen from "./UberIntroScreens/LoginScreen";
+import PG_LoginScreen from "./UberIntroScreens/PG_LoginScreen";
 
 const Stack = createStackNavigator();
 
@@ -26,7 +27,7 @@ export default function App() {
             headerShown: false
           }}
         >
-          <Stack.Screen name="LoginScreen" component={LoginScreen} />
+          <Stack.Screen name="PG_LoginScreen" component={PG_LoginScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </View>

@@ -47,10 +47,15 @@ Object {
 
 4. AppleMusicUI
 -  getTranslateTransform
-  `transform: this.animation.getTranslateTransform()`
+  ```js 
+  transform: this.animation.getTranslateTransform()
+  ```
+
   This is a helper that just saves you some code. 
   The equivalence of what it generates 
   is something like so:
+
+  ```js
   transform: [
       {
           translateX: this.animation.x
@@ -59,8 +64,14 @@ Object {
           translateY: this.animation.y
       }
   ]
+  ```
+* PanResponder
 
-- A native event is a synthetic touch event with the following form:
+It provides a predictable wrapper of the responder handlers provided by the gesture responder system. For each handler, it provides a new `gestureState` object alongside the native `event` object:
+
+- onPanResponderMove: (event, gestureState) => {}
+
+A native `event` is a synthetic touch event with the following form:
 
 * `nativeEvent`
 - changedTouches - Array of all touch events that have changed since the last event
@@ -73,7 +84,8 @@ Object {
 - timestamp - A time identifier for the touch, useful for velocity calculation
 - touches - Array of all current touches on the screen
 
-* A `gestureState` object has the following:
+A `gestureState` object has the following:
+
 - stateID - ID of the gestureState- persisted as long as there at least one touch on screen
 - moveX - the latest screen coordinates of the recently-moved touch
 - moveY - the latest screen coordinates of the recently-moved touch

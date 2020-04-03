@@ -10,18 +10,21 @@ import DeckSwiper from "./src/DeckSwiper";
 import PG_DeckSwiper from "./src/PG_DeckSwiper";
 import LoginScreen from "./UberIntroScreens/LoginScreen";
 import PG_LoginScreen from "./UberIntroScreens/PG_LoginScreen";
+import AppleMusicUI from "./src/AppleMusicUI";
 
 const Stack = createStackNavigator();
 
 export default function App() {
   return (
-    <View style={(style = styles.container)}>
+    // <View style={(style = styles.container)}>
+    <View>
       {/* <TwitterScrollable /> */}
       {/* <PG_TwitterScrollable /> */}
       {/* <DeckSwiper /> */}
       {/* <PG_DeckSwiper /> */}
       {/* For UberIntro */}
-      <NavigationContainer>
+
+      {/* <NavigationContainer>
         <Stack.Navigator
           screenOptions={{
             headerShown: false
@@ -29,13 +32,17 @@ export default function App() {
         >
           <Stack.Screen name="PG_LoginScreen" component={PG_LoginScreen} />
         </Stack.Navigator>
-      </NavigationContainer>
+      </NavigationContainer> */}
+
+      <AppleMusicUI />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center"
   }
 });

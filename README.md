@@ -45,3 +45,48 @@ Object {
 }
 ```
 
+4. AppleMusicUI
+-  getTranslateTransform
+  `transform: this.animation.getTranslateTransform()`
+  This is a helper that just saves you some code. 
+  The equivalence of what it generates 
+  is something like so:
+  transform: [
+      {
+          translateX: this.animation.x
+      },
+      {
+          translateY: this.animation.y
+      }
+  ]
+
+- A native event is a synthetic touch event with the following form:
+
+* `nativeEvent`
+- changedTouches - Array of all touch events that have changed since the last event
+- identifier - The ID of the touch
+- locationX - The X position of the touch, relative to the element
+- locationY - The Y position of the touch, relative to the element
+- pageX - The X position of the touch, relative to the root element
+- pageY - The Y position of the touch, relative to the root element
+- target - The node id of the element receiving the touch event
+- timestamp - A time identifier for the touch, useful for velocity calculation
+- touches - Array of all current touches on the screen
+
+* A `gestureState` object has the following:
+- stateID - ID of the gestureState- persisted as long as there at least one touch on screen
+- moveX - the latest screen coordinates of the recently-moved touch
+- moveY - the latest screen coordinates of the recently-moved touch
+- x0 - the screen coordinates of the responder grant
+- y0 - the screen coordinates of the responder grant
+- dx - accumulated distance of the gesture since the touch started
+- dy - accumulated distance of the gesture since the touch started
+- vx - current velocity of the gesture
+- vy - current velocity of the gesture
+- numberActiveTouches - Number of touches currently on screen
+
+- `extractOffset` takes the delta values from the `gestureState`, and moves them in the `offset`,  before they override the animated values. So we save the position that the animation is currently at.          
+When we call `extractOffset` the value is manipulated synchronously. It's not going through `setValue`, that would stop every other animation.
+
+- From the docs:
+`extracOffset` sets the offset value to the base value,  and resets the base value to zero. The final output of the value is unchanged.

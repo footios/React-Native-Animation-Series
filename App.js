@@ -15,9 +15,18 @@ import AppleMusicUI from "./src/AppleMusicUI";
 const Stack = createStackNavigator();
 
 export default function App() {
+ /* 
+  If <AppleMusicUI /> is in a View, then: 
+  1. The backgroundColor does not animate to black.
+  2. If I try to swipe down and then swipe it back up, 
+  then I can get it down but to full screen, 
+  but then I cannot swipe it down to the minimal version.
+  */
+  return <AppleMusicUI />;
+
   return (
     // <View style={(style = styles.container)}>
-    <View>
+    <View >
       {/* <TwitterScrollable /> */}
       {/* <PG_TwitterScrollable /> */}
       {/* <DeckSwiper /> */}
@@ -33,8 +42,6 @@ export default function App() {
           <Stack.Screen name="PG_LoginScreen" component={PG_LoginScreen} />
         </Stack.Navigator>
       </NavigationContainer> */}
-
-      <AppleMusicUI />
     </View>
   );
 }

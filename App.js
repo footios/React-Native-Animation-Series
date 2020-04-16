@@ -11,39 +11,40 @@ import PG_DeckSwiper from "./src/PG_DeckSwiper";
 import LoginScreen from "./UberIntroScreens/LoginScreen";
 import PG_LoginScreen from "./UberIntroScreens/PG_LoginScreen";
 import AppleMusicUI from "./src/AppleMusicUI";
+import UdemySearchBar from "./src/UdemySearchBar";
 
 const Stack = createStackNavigator();
 
 export default function App() {
- /* 
+  /* 
   If <AppleMusicUI /> is in a View, then: 
   1. The backgroundColor does not animate to black.
   2. If I try to swipe down and then swipe it back up, 
   then I can get it down but to full screen, 
   but then I cannot swipe it down to the minimal version.
   */
-  return <AppleMusicUI />;
+  // return <AppleMusicUI />;
+  return <UdemySearchBar />;
 
-  return (
-    // <View style={(style = styles.container)}>
-    <View >
-      {/* <TwitterScrollable /> */}
-      {/* <PG_TwitterScrollable /> */}
-      {/* <DeckSwiper /> */}
-      {/* <PG_DeckSwiper /> */}
-      {/* For UberIntro */}
+  // return (
+  //   <View>
+  //     {/* <TwitterScrollable /> */}
+  //     {/* <PG_TwitterScrollable /> */}
+  //     {/* <DeckSwiper /> */}
+  //     {/* <PG_DeckSwiper /> */}
+  //     {/* For UberIntro */}
 
-      {/* <NavigationContainer>
-        <Stack.Navigator
-          screenOptions={{
-            headerShown: false
-          }}
-        >
-          <Stack.Screen name="PG_LoginScreen" component={PG_LoginScreen} />
-        </Stack.Navigator>
-      </NavigationContainer> */}
-    </View>
-  );
+  //     {/* <NavigationContainer>
+  //       <Stack.Navigator
+  //         screenOptions={{
+  //           headerShown: false
+  //         }}
+  //       >
+  //         <Stack.Screen name="PG_LoginScreen" component={PG_LoginScreen} />
+  //       </Stack.Navigator>
+  //     </NavigationContainer> */}
+  //   </View>
+  // );
 }
 
 const styles = StyleSheet.create({

@@ -91,16 +91,16 @@ A native `event` is a synthetic touch event with the following form:
 
 A `gestureState` object has the following:
 
-* stateID - ID of the gestureState- persisted as long as there at least one touch on screen
-* moveX - the latest screen coordinates of the recently-moved touch
-* moveY - the latest screen coordinates of the recently-moved touch
-* x0 - the screen coordinates of the responder grant
-* y0 - the screen coordinates of the responder grant
-* dx - accumulated distance of the gesture since the touch started
-* dy - accumulated distance of the gesture since the touch started
-* vx - current velocity of the gesture
-* vy - current velocity of the gesture
-* numberActiveTouches - Number of touches currently on screen
+- stateID - ID of the gestureState- persisted as long as there at least one touch on screen
+- moveX - the latest screen coordinates of the recently-moved touch
+- moveY - the latest screen coordinates of the recently-moved touch
+- x0 - the screen coordinates of the responder grant
+- y0 - the screen coordinates of the responder grant
+- dx - accumulated distance of the gesture since the touch started
+- dy - accumulated distance of the gesture since the touch started
+- vx - current velocity of the gesture
+- vy - current velocity of the gesture
+- numberActiveTouches - Number of touches currently on screen
 
 `extractOffset` takes the delta values from the `gestureState`, and moves them in the `offset`, before they override the animated values. So we save the position that the animation is currently at.  
 When we call `extractOffset` the value is manipulated synchronously. It's not going through `setValue`, that would stop every other animation.
@@ -108,7 +108,7 @@ When we call `extractOffset` the value is manipulated synchronously. It's not go
 - From the docs:
   `extracOffset` sets the offset value to the base value, and resets the base value to zero. The final output of the value is unchanged.
 
-* Slider: Deprecated. 
+* Slider: Deprecated.
 
 - We should use @react-native-community/slider instead. But it's not [compatible with Expo yet](https://forums.expo.io/t/react-native-slider/25681). So we stick on the native Slider.
 
@@ -132,3 +132,13 @@ import Slider from "@react-native-community/slider";
   maximumTrackTintColor="#000000"
 />;
 ```
+
+### 5. Udemy Searchbar
+
+We'll learn how to replicate the searchbar animation of the Udemy app on Both Android and iOS using React Native.
+
+Libraries used :
+
+- react-native-animatable - Oblador
+- react-native-vector-icons - Oblador
+- [Project Files](https://github.com/nathvarun/React-Native-Layout-Tutorial-Series/tree/master/Project%20Files/15.%20Udemy%20Searchbar%20Animation)
